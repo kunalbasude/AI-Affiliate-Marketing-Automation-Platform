@@ -23,6 +23,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName: string, username: string) => Promise<void>;
   signOut: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  getIdToken: () => Promise<string>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -32,6 +33,7 @@ export const AuthContext = createContext<AuthContextType>({
   signUp: async () => {},
   signOut: async () => {},
   signInWithGoogle: async () => {},
+  getIdToken: async () => "",
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -155,6 +157,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const getIdToken = async (): Promise<string> => {
+    const currentUser = getFirebaseAuth().currentUser;
+    if (!currentUser) throw new Error("Not authenticated");
+    return currentUser.getIdToken();
+  };
+
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
@@ -183,7 +191,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, signInWithGoogle, getIdToken }}>
       {children}
     </AuthContext.Provider>
   );

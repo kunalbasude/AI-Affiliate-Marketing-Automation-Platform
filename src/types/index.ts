@@ -152,3 +152,87 @@ export const TONES: { value: Tone; label: string }[] = [
   { value: "luxury", label: "Luxury / Premium" },
   { value: "friendly", label: "Friendly" },
 ];
+
+// ─── Dropshipping / Automation Types ─────────────────────────────────────────
+
+export interface ScrapedProduct {
+  name: string;
+  description: string;
+  originalPrice: number;
+  imageURL: string;
+  images: string[];
+  category: string;
+  tags: string[];
+  rating: number;
+  totalOrders: number;
+  meeshoProductId: string;
+  meeshoUrl: string;
+  supplier: string;
+}
+
+export interface SocialAccount {
+  platform: "instagram" | "youtube";
+  accountId: string;
+  accountName: string;
+  accessToken: string;
+  refreshToken?: string;
+  tokenExpiry?: string;
+  connected: boolean;
+  connectedAt: string;
+}
+
+export interface AutomationSettings {
+  enabled: boolean;
+  scrapeInterval: "hourly" | "every6h" | "daily";
+  maxProductsPerRun: number;
+  minRating: number;
+  minOrders: number;
+  categories: string[];
+  autoPublishToStore: boolean;
+  autoGenerateContent: boolean;
+  autoPostInstagram: boolean;
+  autoUploadYoutube: boolean;
+  contentTone: Tone;
+  priceMarginPercent: number;
+  postsPerDay: number;
+}
+
+export interface AutomationRun {
+  id: string;
+  status: "running" | "completed" | "failed" | "partial";
+  startedAt: string;
+  completedAt?: string;
+  stats: {
+    productsScraped: number;
+    productsAdded: number;
+    contentGenerated: number;
+    videosCreated: number;
+    instagramPosted: number;
+    youtubeUploaded: number;
+    errors: number;
+  };
+  errors: string[];
+  productIds: string[];
+}
+
+export interface VideoGenerationJob {
+  id: string;
+  productId: string;
+  productName: string;
+  status: "pending" | "rendering" | "completed" | "failed";
+  videoUrl?: string;
+  thumbnailUrl?: string;
+  platform: "instagram_reel" | "youtube_shorts";
+  shotStackRenderId?: string;
+  createdAt: string;
+  completedAt?: string;
+}
+
+export interface DropshippingStats {
+  totalProductsScraped: number;
+  totalVideosCreated: number;
+  totalInstagramPosts: number;
+  totalYoutubeUploads: number;
+  lastRunAt?: string;
+  todayPosts: number;
+}

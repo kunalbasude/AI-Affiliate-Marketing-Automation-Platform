@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -13,16 +14,22 @@ import {
   Settings,
   Zap,
   ChevronLeft,
+  ShoppingCart,
+  Bot,
+  Link2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const navItems = [
+const navItems: { href: string; icon: React.ElementType; label: string; badge?: string }[] = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/dropshipping", icon: ShoppingCart, label: "Dropshipping", badge: "NEW" },
   { href: "/products", icon: ShoppingBag, label: "Products" },
   { href: "/content", icon: Sparkles, label: "AI Content" },
   { href: "/scheduler", icon: Calendar, label: "Scheduler" },
   { href: "/store", icon: Store, label: "My Store" },
   { href: "/analytics", icon: BarChart3, label: "Analytics" },
+  { href: "/automation", icon: Bot, label: "Automation" },
+  { href: "/social-accounts", icon: Link2, label: "Social Accounts" },
   { href: "/settings", icon: Settings, label: "Settings" },
 ];
 
@@ -95,7 +102,16 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 />
               )}
               <item.icon className={cn("w-5 h-5 flex-shrink-0", collapsed && "mx-auto")} />
-              {!collapsed && <span>{item.label}</span>}
+              {!collapsed && (
+                <span className="flex-1 flex items-center justify-between gap-2">
+                  {item.label}
+                  {item.badge && (
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-indigo-600 text-white leading-none">
+                      {item.badge}
+                    </span>
+                  )}
+                </span>
+              )}
               {collapsed && (
                 <div className="absolute left-full ml-2 px-2 py-1 rounded-md bg-slate-900 dark:bg-slate-700 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50">
                   {item.label}

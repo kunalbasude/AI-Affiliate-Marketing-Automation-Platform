@@ -140,3 +140,39 @@ export async function getPublicStoreProducts(uid: string): Promise<Product[]> {
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Product));
 }
+
+// ─── Automation & Dropshipping ────────────────────────────────────────────────
+
+import type { AutomationRun, SocialAccount, AutomationSettings, VideoGenerationJob } from "@/types";
+
+export async function getAutomationRuns(uid: string): Promise<AutomationRun[]> {
+  const q = query(
+    collection(db(), `users/${uid}/automationRuns`),
+    orderBy("startedAt", "desc")
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as AutomationRun));
+}
+
+export async function getAutomationSettings(uid: string): Promise<AutomationSettings | null> {
+  const snap = await getDoc(doc(db(), `users/${uid}/settings`, "automation"));
+  return snap.exists() ? (snap.data() as AutomationSettings) : null;
+}
+
+export async function saveAutomationSettings(uid: string, settings: AutomationSettings) {
+  await setDoc(doc(db(), `users/${uid}/settings`, "automation"), settings);
+}
+
+export async function getSocialAccounts(uid: string): Promise<SocialAccount[]> {
+  const snap = await getDocs(collection(db(), `users/${uid}/socialAccounts`));
+  return snap.docs.map((d) => d.data() as SocialAccount);
+}
+
+export async function getVideoJobs(uid: string): Promise<VideoGenerationJob[]> {
+  const q = query(
+    collection(db(), `users/${uid}/videoJobs`),
+    orderBy("createdAt", "desc")
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as VideoGenerationJob));
+}
