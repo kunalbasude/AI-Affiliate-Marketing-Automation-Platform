@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,16 +14,22 @@ import {
   Settings,
   X,
   Zap,
+  ShoppingCart,
+  Bot,
+  Link2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const navItems = [
+const navItems: { href: string; icon: React.ElementType; label: string; badge?: string }[] = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/dropshipping", icon: ShoppingCart, label: "Dropshipping", badge: "NEW" },
   { href: "/products", icon: ShoppingBag, label: "Products" },
   { href: "/content", icon: Sparkles, label: "AI Content" },
   { href: "/scheduler", icon: Calendar, label: "Scheduler" },
   { href: "/store", icon: Store, label: "My Store" },
   { href: "/analytics", icon: BarChart3, label: "Analytics" },
+  { href: "/automation", icon: Bot, label: "Automation" },
+  { href: "/social-accounts", icon: Link2, label: "Social Accounts" },
   { href: "/settings", icon: Settings, label: "Settings" },
 ];
 
@@ -69,7 +76,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
               </button>
             </div>
 
-            <nav className="flex-1 py-4 px-3 space-y-1">
+            <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
               {navItems.map((item) => {
                 const isActive =
                   pathname === item.href ||
@@ -87,8 +94,13 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
                     )}
                   >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.label}</span>
+                    <item.icon className="w-5 h-5 flex-shrink-0" />
+                    <span className="flex-1">{item.label}</span>
+                    {item.badge && (
+                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-indigo-600 text-white leading-none">
+                        {item.badge}
+                      </span>
+                    )}
                   </Link>
                 );
               })}
