@@ -27,7 +27,7 @@ const topProducts = [
 const chartData = [65, 40, 85, 30, 70, 95, 55, 80, 45, 90, 60, 75, 50, 85, 40, 70, 95, 55, 80, 65, 90, 45, 75, 60, 85, 50, 70, 40, 65, 80];
 
 const referrers = [
-  { source: "Instagram", visits: 1240, pct: 42 },
+  { source: "Camera", visits: 1240, pct: 42 },
   { source: "YouTube", visits: 780, pct: 26 },
   { source: "Direct", visits: 520, pct: 17 },
   { source: "Twitter", visits: 290, pct: 10 },

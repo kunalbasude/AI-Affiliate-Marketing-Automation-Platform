@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Plus, Clock, Instagram, Youtube, Twitter, CheckCircle, AlertCircle, XCircle } from "lucide-react";
+import { Calendar, Plus, Clock, Camera, PlayCircle, Twitter, CheckCircle, AlertCircle, XCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/toast";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-const platformIcons: Record<string, typeof Instagram> = { instagram: Instagram, youtube: Youtube, twitter: Twitter };
+const platformIcons: Record<string, typeof Camera> = { instagram: Camera, youtube: PlayCircle, twitter: Twitter };
 
 const demoSchedules = [
   { id: "1", productName: "Wireless Earbuds Pro", platform: "instagram", caption: "🔥 These earbuds are going viral...", scheduledAt: "2026-03-29T10:00", status: "scheduled" as const },
@@ -106,7 +106,7 @@ export default function SchedulerPage() {
             <CardContent className="p-0">
               <div className="divide-y divide-slate-200 dark:divide-slate-700">
                 {demoSchedules.map((schedule) => {
-                  const PlatformIcon = platformIcons[schedule.platform] || Instagram;
+                  const PlatformIcon = platformIcons[schedule.platform] || Camera;
                   const conf = statusConfig[schedule.status];
                   const StatusIcon = conf.icon;
                   return (
@@ -135,7 +135,7 @@ export default function SchedulerPage() {
         <div className="space-y-4">
           <Select label="Content" options={demoSchedules.map((s) => ({ value: s.id, label: s.productName }))} placeholder="Select content to schedule" />
           <Select label="Platform" options={[
-            { value: "instagram", label: "Instagram" }, { value: "youtube", label: "YouTube" }, { value: "twitter", label: "Twitter" },
+            { value: "instagram", label: "Camera" }, { value: "youtube", label: "YouTube" }, { value: "twitter", label: "Twitter" },
           ]} placeholder="Select platform" />
           <Input label="Date & Time" type="datetime-local" />
           <Textarea label="Notes (optional)" placeholder="Any notes for this post..." />

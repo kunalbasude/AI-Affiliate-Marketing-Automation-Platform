@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Sparkles, Copy, Save, RefreshCw, Instagram, Youtube, Twitter, Hash, FileText, Film, LayoutGrid } from "lucide-react";
+import { ArrowLeft, Sparkles, Copy, Save, RefreshCw, Camera, PlayCircle, Twitter, Hash, FileText, Film, LayoutGrid } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,9 +19,9 @@ const products = [
   { id: "5", name: "Face Serum Combo", sellingPrice: 449 },
 ];
 
-const typeIcons: Record<string, typeof Instagram> = {
-  instagram_caption: Instagram, instagram_reel: Film, instagram_carousel: LayoutGrid,
-  youtube_script: Youtube, youtube_shorts: Youtube, hashtags: Hash, product_description: FileText,
+const typeIcons: Record<string, typeof Camera> = {
+  instagram_caption: Camera, instagram_reel: Film, instagram_carousel: LayoutGrid,
+  youtube_script: PlayCircle, youtube_shorts: PlayCircle, hashtags: Hash, product_description: FileText,
 };
 
 const demoResult = `🔥 These ₹999 earbuds are SELLING OUT FAST!

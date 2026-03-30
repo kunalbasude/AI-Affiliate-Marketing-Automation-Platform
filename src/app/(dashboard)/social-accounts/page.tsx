@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
-  Instagram,
-  Youtube,
+  Camera,
+  PlayCircle,
   CheckCircle,
   XCircle,
   Link2,
@@ -191,7 +191,7 @@ export default function SocialAccountsPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-orange-400 flex items-center justify-center">
-                  <Instagram className="w-5 h-5 text-white" />
+                  <Camera className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <p className="font-semibold">Instagram</p>
@@ -216,24 +216,45 @@ export default function SocialAccountsPage() {
 
             {!igAccount && (
               <div className="space-y-3">
-                <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 text-xs text-blue-700 dark:text-blue-300 space-y-1">
-                  <p className="font-medium">How to get your Instagram access token:</p>
-                  <ol className="list-decimal pl-4 space-y-0.5">
-                    <li>Go to{" "}
+                {/* Already professional — short path */}
+                <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-200 flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-emerald-600" />
+                  <p>Your account is already a <strong>Professional / Monetized</strong> account — you just need the access token below.</p>
+                </div>
+
+                <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 text-xs text-blue-700 dark:text-blue-300 space-y-2">
+                  <p className="font-semibold">Get your token in 3 steps:</p>
+                  <ol className="list-decimal pl-4 space-y-1.5">
+                    <li>
+                      Open{" "}
                       <a
                         href="https://developers.facebook.com/tools/explorer"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline inline-flex items-center gap-0.5"
+                        className="underline font-medium inline-flex items-center gap-0.5"
                       >
                         Meta Graph API Explorer <ExternalLink className="w-3 h-3" />
                       </a>
+                      {" "}→ select your Facebook App (create one free if needed)
                     </li>
-                    <li>Select your app and generate a User token</li>
-                    <li>Add permissions: <code>instagram_basic</code>, <code>instagram_content_publish</code>, <code>pages_read_engagement</code></li>
-                    <li>Convert to a Long-Lived Token (60-day expiry)</li>
-                    <li>Paste below</li>
+                    <li>
+                      Click <strong>Generate Access Token</strong> and tick these permissions:
+                      <div className="mt-1 flex flex-wrap gap-1">
+                        {["instagram_basic", "instagram_content_publish", "pages_read_engagement", "pages_show_list"].map((p) => (
+                          <code key={p} className="px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900 font-mono text-[10px]">{p}</code>
+                        ))}
+                      </div>
+                    </li>
+                    <li>
+                      Exchange for a <strong>Long-Lived Token</strong> (60-day expiry) — call this URL once:
+                      <div className="mt-1 p-1.5 rounded bg-blue-100 dark:bg-blue-900 font-mono text-[10px] break-all select-all">
+                        GET graph.facebook.com/v19.0/oauth/access_token?grant_type=fb_exchange_token&amp;client_id=APP_ID&amp;client_secret=APP_SECRET&amp;fb_exchange_token=SHORT_TOKEN
+                      </div>
+                    </li>
                   </ol>
+                  <p className="text-[11px] text-blue-600 dark:text-blue-400 pt-1">
+                    Your Instagram username: <strong>@truth_of_the_journey</strong> — make sure it is linked to your Facebook Page before generating the token.
+                  </p>
                 </div>
                 <input
                   type="password"
@@ -273,7 +294,7 @@ export default function SocialAccountsPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center">
-                  <Youtube className="w-5 h-5 text-white" />
+                  <PlayCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <p className="font-semibold">YouTube</p>
@@ -320,7 +341,7 @@ export default function SocialAccountsPage() {
                   {ytLoading ? (
                     <><RefreshCw className="w-4 h-4 animate-spin" /> Connecting...</>
                   ) : (
-                    <><Youtube className="w-4 h-4" /> Connect YouTube Channel</>
+                    <><PlayCircle className="w-4 h-4" /> Connect YouTube Channel</>
                   )}
                 </button>
               </div>

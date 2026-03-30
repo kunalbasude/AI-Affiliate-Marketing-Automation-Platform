@@ -39,7 +39,7 @@ const features = [
   {
     icon: Share2,
     title: "Social Scheduler",
-    description: "Schedule and manage posts across Instagram, YouTube, and more.",
+    description: "Schedule and manage posts across Camera, YouTube, and more.",
   },
   {
     icon: TrendingUp,

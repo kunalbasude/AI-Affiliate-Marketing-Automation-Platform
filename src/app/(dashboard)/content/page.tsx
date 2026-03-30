@@ -3,14 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Sparkles, Plus, Copy, Calendar, Trash2, Instagram, Youtube, Twitter } from "lucide-react";
+import { Sparkles, Plus, Copy, Calendar, Trash2, Camera, PlayCircle, Twitter } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/toast";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-const platformIcons: Record<string, typeof Instagram> = { instagram: Instagram, youtube: Youtube, twitter: Twitter };
+const platformIcons: Record<string, typeof Camera> = { instagram: Camera, youtube: PlayCircle, twitter: Twitter };
 
 const demoContent = [
   { id: "1", type: "instagram_caption", platform: "instagram", productName: "Wireless Earbuds Pro", tone: "urgent", preview: "🔥 These ₹999 earbuds are SELLING OUT! Premium wireless earbuds with 24hr battery. Now at just ₹1,299 — limited stock! 🎧\n\n#WirelessEarbuds #TechDeals #BudgetGadgets", createdAt: "2 hours ago" },
@@ -51,7 +51,7 @@ export default function ContentPage() {
       <Tabs defaultValue="all">
         <TabsList>
           <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="instagram">Instagram</TabsTrigger>
+          <TabsTrigger value="instagram">Camera</TabsTrigger>
           <TabsTrigger value="youtube">YouTube</TabsTrigger>
         </TabsList>
 
@@ -59,7 +59,7 @@ export default function ContentPage() {
           <TabsContent key={tab} value={tab}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {(tab === "all" ? demoContent : demoContent.filter((c) => c.platform === tab)).map((content, i) => {
-                const PlatformIcon = platformIcons[content.platform] || Instagram;
+                const PlatformIcon = platformIcons[content.platform] || Camera;
                 return (
                   <motion.div key={content.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
                     <Card className="hover:shadow-md transition-shadow">

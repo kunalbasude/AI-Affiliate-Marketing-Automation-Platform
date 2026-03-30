@@ -6,8 +6,8 @@ import {
   Zap,
   ShoppingCart,
   TrendingUp,
-  Instagram,
-  Youtube,
+  Camera,
+  PlayCircle,
   Package,
   Play,
   RefreshCw,
@@ -33,8 +33,8 @@ interface Stats {
 const STAT_CARDS = [
   { key: "totalProductsScraped", label: "Products Scraped", icon: Package, color: "indigo" },
   { key: "totalVideosCreated", label: "Videos Created", icon: Video, color: "purple" },
-  { key: "totalInstagramPosts", label: "Instagram Posts", icon: Instagram, color: "pink" },
-  { key: "totalYoutubeUploads", label: "YouTube Shorts", icon: Youtube, color: "red" },
+  { key: "totalInstagramPosts", label: "Instagram Posts", icon: Camera, color: "pink" },
+  { key: "totalYoutubeUploads", label: "YouTube Shorts", icon: PlayCircle, color: "red" },
 ] as const;
 
 export default function DropshippingPage() {
@@ -222,8 +222,8 @@ export default function DropshippingPage() {
             { icon: BarChart2, label: "Filter & Score", sub: "Rating + orders", color: "blue" },
             { icon: Zap, label: "AI Content", sub: "Captions + scripts", color: "violet" },
             { icon: Video, label: "Generate Reel", sub: "Shotstack render", color: "purple" },
-            { icon: Instagram, label: "Post Instagram", sub: "Reel + caption", color: "pink" },
-            { icon: Youtube, label: "Upload YouTube", sub: "#Shorts", color: "red" },
+            { icon: Camera, label: "Post Instagram", sub: "Reel + caption", color: "pink" },
+            { icon: PlayCircle, label: "Upload YouTube", sub: "#Shorts", color: "red" },
             { icon: ShoppingCart, label: "Add to Store", sub: "Auto-published", color: "emerald" },
           ].map((step, i, arr) => (
             <div key={i} className="flex items-center gap-3">
